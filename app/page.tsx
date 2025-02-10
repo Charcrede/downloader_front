@@ -5,7 +5,7 @@ import CustomCursor from "./cursor";
 import HamburgerToggle from "./HamburgerToggle";
 import { url } from "inspector";
 export default function Home() {
-  const [itag, setItag] = useState<{resolution : "", itag : ""}>({resolution : "", itag : ""});
+  const [itag, setItag] = useState<any>({resolution : "", itag : ""});
   const [link, setLink] = useState("");
   const [showLoad, setShowLoad] = useState(false)
   const [streams, setStreams] = useState<any>()
@@ -51,12 +51,14 @@ export default function Home() {
   
             const data = await response.json();
             setStreams(data)
-            if (data.streams.length -2 ) {
-              setItag({resolution : data.streams[data.streams.length-2].resolution, itag : data.streams[data.streams.length-2].itag})
+            if (data.formats.length -2 ) {
+              setItag({resolution : data.formats[data.formats.length-2].resolution, itag : data.formats[data.formats.length-2].format_id})
             }else{
-              setItag({resolution : data.streams[data.streams.length-1].resolution, itag : data.streams[data.streams.length-1].itag})
+              setItag({resolution : data.formats[data.formats.length-1].resolution, itag : data.formats[data.formats.length-1].format_id})
             }
             setShowLoad(false)
+            console.log(streams);
+            
           } catch (error) {
             console.error("Erreur lors de l'envoi au backend :", error);
             setShowLoad(false)
@@ -78,10 +80,12 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ url : link, itag : itag.itag, title : streams.title + '.mp4' }),
+        body: JSON.stringify({ url : link, format_id : itag.itag, title : streams.title + '.mp4' }),
       });
 
       // const data = await response.json();
+      console.log(itag);
+      
       const contentType = response.headers.get('Content-Type');
     if (contentType && contentType.startsWith('video')) {
       // Si la réponse est une vidéo, traiter différemment
@@ -151,16 +155,16 @@ export default function Home() {
     {streams && (
       <div className="bg-white p-8 rounded-2xl flex gap-8">
         <div className="w-1/2">
-          <img src={streams.thumbnail_url} alt="image de la musique" className="w-full rounded-2xl"/>
+          <img src={streams.thumbnail} alt="image de la musique" className="w-full rounded-2xl"/>
         </div>
         <div>
           <div className="flex gap-4 items-center">
             <span className="px-4 py-2 text-red-600 border border-red-600 rounded-full">video</span>
             <div className="relative">
             <button onClick={()=>{setShowList(!showList)}} className="px-4 py-2 text-red-600 border border-red-600 rounded-full">MP4 ( {itag.resolution} )</button>
-            <ul className={`${!showList ? "h-0" : "h-52 p-2"} absolute bg-[#f0f0f0] z-20 top-12 -left-4 -right-4 overflow-hidden duration-300 rounded-xl`}>
-              {streams.streams.map((el : any,i : number)=>(
-                <li key={i} className="p-1 hover:bg-[#e0e0e0]"><button className="hover:bg-[#e0e0e0]" onClick={()=>{setItag({resolution : el.resolution, itag : el.itag}); setShowList(false)}}>MP4 ( {el.resolution} )</button></li>
+            <ul className={`${!showList ? "h-0" : "h-auto p-2"} absolute bg-[#f0f0f0] z-20 top-12 -left-4 -right-4 overflow-hidden duration-300 rounded-xl`}>
+              {streams.formats.map((el : any,i : number)=>(
+                <li key={i} className="p-1 hover:bg-[#e0e0e0]"><button className="hover:bg-[#e0e0e0]" onClick={()=>{setItag({resolution : el.resolution, itag : el.format_id}); setShowList(false)}}>MP4 ( {el.resolution} )</button></li>
               ))}
             </ul>
             </div>

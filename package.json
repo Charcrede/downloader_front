@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "downloader_front": "file:",
-    "next": "15.1.4",
+    "next": "^15.1.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "ytdl-core": "^4.11.5"
