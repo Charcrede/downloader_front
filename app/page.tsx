@@ -5,10 +5,10 @@ import Image from "next/image";
 
 
 export default function Home() {
-  const [itag, setItag] = useState<any>({ resolution: "", itag: "" });
+  const [itag, setItag] = useState<{ resolution: "", itag: "" }>({ resolution: "", itag: "" });
   const [link, setLink] = useState("");
   const [showLoad, setShowLoad] = useState(false)
-  const [streams, setStreams] = useState<any>()
+  const [streams, setStreams] = useState<{formats : [{resolution : ""}], title : "", thumbnail : ""}>()
   const [showList, setShowList] = useState(false)
   const [loading, setLoading] = useState(false)
   // Fonction pour coller le contenu du presse-papiers
@@ -47,7 +47,6 @@ export default function Home() {
             setItag({ resolution: data.formats[data.formats.length - 1].resolution, itag: data.formats[data.formats.length - 1].format_id })
           }
           setShowLoad(false)
-          console.log(streams);
 
         } catch (error) {
           console.error("Erreur lors de l'envoi au backend :", error);
@@ -70,7 +69,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ url: link, format_id: itag.itag, title: streams.title + '.mp4' }),
+        body: JSON.stringify({ url: link, format_id: itag.itag, title: streams?.title + '.mp4' }),
       });
 
       // const data = await response.json();
@@ -88,7 +87,7 @@ export default function Home() {
         const videoUrl = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = videoUrl;
-        a.download = streams.title + '.mp4';
+        a.download = streams?.title + '.mp4';
         a.click();
         setLoading(false)
       }
