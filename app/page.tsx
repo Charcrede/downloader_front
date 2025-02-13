@@ -8,11 +8,10 @@ export default function Home() {
   const [itag, setItag] = useState<{ resolution: "", itag: "" }>({ resolution: "", itag: "" });
   const [link, setLink] = useState("");
   const [showLoad, setShowLoad] = useState(false)
-  const [streams, setStreams] = useState<{formats : [{resolution : ""}], title : "", thumbnail : ""}>()
+  const [streams, setStreams] = useState<{formats : [{resolution : "", format_id : ""}], title : "", thumbnail : ""}>()
   const [showList, setShowList] = useState(false)
   const [loading, setLoading] = useState(false)
   // Fonction pour coller le contenu du presse-papiers
-  const [isValidLink, setIsValidLink] = useState(false);
 
   // Fonction pour valider une URL
   const isValidURL = (url: string): boolean => {
@@ -25,7 +24,6 @@ export default function Home() {
   // Vérification du lien à chaque changement
   useEffect(() => {
     if (isValidURL(link)) {
-      setIsValidLink(true);
       setShowLoad(true)
 
       // Envoyer une requête au backend
@@ -56,7 +54,6 @@ export default function Home() {
 
       sendLinkToBackend();
     } else {
-      setIsValidLink(false);
     }
   }, [link]);
 
@@ -157,7 +154,7 @@ export default function Home() {
                 <div className="relative">
                   <button onClick={() => { setShowList(!showList) }} className="px-4 py-2 text-red-600 border border-red-600 rounded-full">MP4 ( {itag.resolution} )</button>
                   <ul className={`${!showList ? "h-0" : "h-auto p-2"} absolute bg-[#f0f0f0] z-20 top-12 -left-4 -right-4 overflow-hidden duration-300 rounded-xl`}>
-                    {streams.formats.map((el: any, i: number) => (
+                    {streams.formats.map((el: {resolution : "", format_id : ""}, i: number) => (
                       <li key={i} className="p-1 hover:bg-[#e0e0e0]"><button className="hover:bg-[#e0e0e0]" onClick={() => { setItag({ resolution: el.resolution, itag: el.format_id }); setShowList(false) }}>MP4 ( {el.resolution} )</button></li>
                     ))}
                   </ul>
