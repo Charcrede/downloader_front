@@ -29,7 +29,7 @@ export default function Home() {
       // Envoyer une requête au backend
       const sendLinkToBackend = async () => {
         try {
-          const response = await fetch("http://youthful-kizzie-gool-b1c1af74.koyeb.app:8000/api/streams/", {
+          const response = await fetch("https://youthful-kizzie-gool-b1c1af74.koyeb.app/api/streams/", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -61,7 +61,7 @@ export default function Home() {
   const handleSubmit = async () => {
     setLoading(true)
     try {
-      const response = await fetch("http://youthful-kizzie-gool-b1c1af74.koyeb.app:8000/api/download/", {
+      const response = await fetch("https://youthful-kizzie-gool-b1c1af74.koyeb.app/api/download/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
