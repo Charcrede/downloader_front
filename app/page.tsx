@@ -12,16 +12,6 @@ export default function Home() {
   const [showList, setShowList] = useState(false)
   const [loading, setLoading] = useState(false)
   // Fonction pour coller le contenu du presse-papiers
-  const handlePaste = async () => {
-    try {
-      const text = await navigator.clipboard.readText();
-      setLink(text);
-    } catch (err) {
-      console.error("Erreur lors de la récupération du presse-papiers :", err);
-      alert("Impossible de coller le texte. Veuillez autoriser l'accès au presse-papiers.");
-    }
-  };
-
   const [isValidLink, setIsValidLink] = useState(false);
 
   // Fonction pour valider une URL
