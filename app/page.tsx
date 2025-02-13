@@ -1,9 +1,9 @@
 // pages/index.js
 "use client"
 import { useState, useEffect } from "react";
-import CustomCursor from "./cursor";
-import HamburgerToggle from "./HamburgerToggle";
-import { url } from "inspector";
+import Image from "next/image";
+
+
 export default function Home() {
   const [itag, setItag] = useState<any>({ resolution: "", itag: "" });
   const [link, setLink] = useState("");
@@ -121,10 +121,10 @@ export default function Home() {
       <div className=" font-clash lg:px-56 xs:px-8 relative">
         {/* <CustomCursor></CustomCursor> */}
         {/* <HamburgerToggle></HamburgerToggle> */}
-        <img src="/assets/Star-1.svg" alt="" className="absolute -top-0 left-0 -z-10 lg:w-48 lg:h-48 xs:w-24 xs:h-24 rotate" />
-        <img src="../assets/One-Forth-Ellipse.svg" alt="" className="absolute -top-0 left-3/4 -z-10  lg:w-24 lg:h-24 xs:w-16 xs:h-16 scale" />
-        <img src="../assets/Waves_2.svg" alt="" className="absolute top-1/2 right-0 -z-10 lg:w-48 lg:h-48 xs:w-24 xs:h-24" />
-        <img src="../assets/Eye2.svg" alt="" className="absolute -bottom-3/4 left-1/2 -z-10  lg:w-24 lg:h-24 xs:w-16 xs:h-16 bounce" />
+        <Image src="/assets/Star-1.svg" alt="" className="absolute -top-0 left-0 -z-10 lg:w-48 lg:h-48 xs:w-24 xs:h-24 rotate" />
+        <Image src="../assets/One-Forth-Ellipse.svg" alt="" className="absolute -top-0 left-3/4 -z-10  lg:w-24 lg:h-24 xs:w-16 xs:h-16 scale" />
+        <Image src="../assets/Waves_2.svg" alt="" className="absolute top-1/2 right-0 -z-10 lg:w-48 lg:h-48 xs:w-24 xs:h-24" />
+        <Image src="../assets/Eye2.svg" alt="" className="absolute -bottom-3/4 left-1/2 -z-10  lg:w-24 lg:h-24 xs:w-16 xs:h-16 bounce" />
         <h1 className="mb-4 font-clash lg:text-[5rem] xs:text-[2rem] font-semibold mt-8"><span
           className="font-normal block lg:text-[3rem] xs:text-[1.5rem]">Bienvenu sur </span><span className="text-red-600">YT</span> Downloader</h1>
         <form className="lg:text-3xl xs:text-xl italic float-right lg:mt-4 xs:-mt-4 w-full">
@@ -160,7 +160,7 @@ export default function Home() {
         {streams && (
           <div className="bg-white p-8 rounded-2xl flex gap-8">
             <div className="w-1/2">
-              <img src={streams.thumbnail} alt="image de la musique" className="w-full rounded-2xl" />
+              <Image src={streams.thumbnail} alt="image de la musique" className="w-full rounded-2xl" />
             </div>
             <div>
               <div className="flex gap-4 items-center">
@@ -193,8 +193,8 @@ export default function Home() {
         )}
       </div>
       <div className="lg:mt-64 xs:mt-32 lg:px-56 xs:px-8 relative">
-        <img src="../assets/Star-1.svg" alt="" className="absolute lg:-bottom-0 xs:-bottom-1/4 left-1/4 -z-10  lg:w-24 lg:h-24 xs:w-16 xs:h-16 scale" />
-        <img src="../assets/Half-Shape_2_inverted.svg" alt="" className="absolute lg:-top-0 xs:top-1/2 right-1/4 -z-10  lg:w-24 lg:h-24 xs:w-16 xs:h-16 scale" />
+        <Image src="../assets/Star-1.svg" alt="" className="absolute lg:-bottom-0 xs:-bottom-1/4 left-1/4 -z-10  lg:w-24 lg:h-24 xs:w-16 xs:h-16 scale" />
+        <Image src="../assets/Half-Shape_2_inverted.svg" alt="" className="absolute lg:-top-0 xs:top-1/2 right-1/4 -z-10  lg:w-24 lg:h-24 xs:w-16 xs:h-16 scale" />
       </div>
       {loading && (
 
